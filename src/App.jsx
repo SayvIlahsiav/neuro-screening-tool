@@ -85,6 +85,60 @@ const TestInfoModal = ({ testId, onClose }) => {
     );
 };
 
+// ================ CUSTOM DATE INPUT ================
+
+const DateInput = ({ value, onChange, className, required }) => {
+    // value is YYYY-MM-DD
+    const [displayValue, setDisplayValue] = useState('');
+
+    useEffect(() => {
+        if (value) {
+            const parts = value.split('-');
+            if (parts.length === 3) {
+                const [y, m, d] = parts;
+                setDisplayValue(`${d}/${m}/${y}`);
+            }
+        } else {
+            setDisplayValue('');
+        }
+    }, [value]);
+
+    const handleChange = (e) => {
+        let val = e.target.value.replace(/\D/g, ''); // numbers only
+        if (val.length > 8) val = val.slice(0, 8);
+        
+        // Add slashes
+        let formatted = '';
+        if (val.length > 0) formatted += val.slice(0, 2);
+        if (val.length > 2) formatted += '/' + val.slice(2, 4);
+        if (val.length > 4) formatted += '/' + val.slice(4, 8);
+        
+        setDisplayValue(formatted);
+
+        // Notify parent if complete
+        if (val.length === 8) {
+            const d = val.slice(0, 2);
+            const m = val.slice(2, 4);
+            const y = val.slice(4, 8);
+            onChange(`${y}-${m}-${d}`);
+        } else if (val.length === 0) {
+            onChange('');
+        }
+    };
+
+    return (
+        <input
+            type="text"
+            placeholder="DD/MM/YYYY"
+            value={displayValue}
+            onChange={handleChange}
+            className={className}
+            required={required}
+            maxLength={10}
+        />
+    );
+};
+
 // ================ ONBOARDING MODAL ================
 
 const OnboardingModal = ({ onComplete }) => {
@@ -122,10 +176,9 @@ const OnboardingModal = ({ onComplete }) => {
                     </div>
                     <div>
                         <label className="block text-sm font-semibold text-wood mb-2">Date of Birth</label>
-                        <input
-                            type="date"
+                        <DateInput
                             value={dob}
-                            onChange={(e) => setDob(e.target.value)}
+                            onChange={setDob}
                             className="w-full p-4 rounded-xl border-2 border-sage/30 focus:border-forest focus:outline-none transition-colors"
                             required
                         />
@@ -644,8 +697,11 @@ const App = () => {
                             <div className="space-y-4">
                                 <input type="text" value={profile.name} onChange={(e) => setProfile(p => ({ ...p, name: e.target.value }))}
                                     className="w-full p-3 rounded-xl border-2 border-sage/30 focus:border-forest focus:outline-none" placeholder="Name" />
-                                <input type="date" value={profile.dob} onChange={(e) => setProfile(p => ({ ...p, dob: e.target.value }))}
-                                    className="w-full p-3 rounded-xl border-2 border-sage/30 focus:border-forest focus:outline-none" />
+                                <DateInput
+                                    value={profile.dob}
+                                    onChange={(val) => setProfile(p => ({ ...p, dob: val }))}
+                                    className="w-full p-3 rounded-xl border-2 border-sage/30 focus:border-forest focus:outline-none"
+                                />
                                 <select value={profile.gender} onChange={(e) => setProfile(p => ({ ...p, gender: e.target.value }))}
                                     className="w-full p-3 rounded-xl border-2 border-sage/30 focus:border-forest focus:outline-none bg-white">
                                     <option value="Female">Female</option>
