@@ -1,70 +1,107 @@
 # 🧠 Neurodivergence Screening Tool
 
-A free, offline, privacy-first web application for neurodivergence screening questionnaires. This tool was created to digitize cumbersome PDF-based screening processes, making them easier to complete and manage.
+A premium, privacy-first, offline-capable web application for neurodivergence screening questionnaires. Designed to digitize cumbersome paper/PDF-based processes into a modern, interactive experience while maintaining 100% medical fidelity.
 
-## Why This Tool Was Created
-
-This tool was developed to solve a practical problem: filling out neurodivergence screening questionnaires as static PDFs is difficult and cumbersome. 
-
-I created this web app to:
-- **Convert PDFs to Interactive Forms**: Transform traditional paper-based/PDF questionnaires into a modern, user-friendly web interface.
-- **Maintain Fidelity**: The questions and tests are implemented exactly as found in the original research sources, with no changes to the text or structure.
-- **Enable Easier Completion**: Features like auto-saving and progress tracking make it easier to complete lengthy questionnaires at your own pace.
-- **Provide Local Privacy**: All data is stored locally in your browser. This tool does not send your sensitive health information to any server.
-
-## Included Screening Questionnaires
-
-This tool consolidates 5 established screening tools into a single interface. All questions are sourced directly from the original published tests.
-
-| Test | Questions | Description |
-|------|-----------|-------------|
-| **ADHD-RS-IV** | 87 | ADHD Rating Scale-IV with Adult Prompts (DuPaul et al., 1998) |
-| **Wender Utah** | 61 | WURS-25 Childhood ADHD Retrospective Scale (Ward, Wender, et al., 1993) |
-| **SASI** | 159 | Women's ADHD Self-Assessment Symptom Inventory (Nadeau & Quinn) |
-| **Autism Quotient** | 50 | AQ-50 (Simon Baron-Cohen et al., 2001) |
-| **Aspie Quiz v5** | 119 | Comprehensive neurodiverse/neurotypical trait assessment (Leif Ekblad) |
-
-## Features
-
-- **Interactive UI**: Clean, organized interface for navigating hundreds of questions.
-- **Auto-Save**: Progress is automatically saved to your browser's local storage.
-- **Notes & Annotations**: Add notes for specific questions or entire sections—useful for providing context to healthcare providers.
-- **Printable Reports**: Generate professional-looking PDF reports of your completed tests to share with clinicians.
-- **Test Information**: Detailed background on each test, including its history, scoring methods, and validity (accessible via the ℹ️ icon).
-- **100% Offline**: Runs entirely in the browser. No internet connection required after the initial load.
-
-## Getting Started
-
-### Option 1: Just Open the File
-Download the project and open `index.html` directly in any modern web browser.
-
-### Option 2: Run a Local Server
-For the best experience (ensuring `localStorage` works correctly in all browsers), run a simple local server:
-
-```bash
-# Using Python
-python -m http.server 8080
-
-# Using Node.js
-npx serve .
-```
-
-## Privacy
-
-**Your data never leaves your device.** This application uses browser local storage only. There is no database, no tracking, and no telemetry.
-
-## Important Disclaimer
-
-⚠️ **This is a screening tool, NOT a diagnostic instrument.**
-
-- These questionnaires are intended to help you explore your traits and prepare for professional evaluation.
-- High scores indicate a possible benefit from professional assessment but do not constitute a diagnosis.
-- Always consult with a qualified healthcare professional (Psychologist, Psychiatrist, or GP) for a formal diagnosis.
-- This app is a digital conversion of existing tests; the creator of this app did not develop the tests themselves.
-
-## Collaboration
-
-I welcome collaboration for others who wish to add related validated screening tests to this tool.
+![React](https://img.shields.io/badge/React-18.2-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-5.1-646CFF?logo=vite)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
-*Built to make neurodivergence screening accessible and manageable.*
+
+## 🌟 Key Features
+
+### 📋 Interactive Screening
+- **5 Validated Tests**: Consolidated interface for ADHD, Autism, and broad neurodiversity screening.
+- **Sectioned Navigation**: Long questionnaires are broken into logical sections for easier completion.
+- **Visual Progress**: Real-time progress tracking for individual tests and overall screening status.
+- **Smart Auto-Advance**: Automatically focuses on the next unanswered question for a seamless flow.
+
+### 🔐 Privacy & Portability
+- **100% Offline**: Runs entirely in the browser. No data ever leaves your device.
+- **Local Storage**: Progress is persistent across browser sessions using `localStorage`.
+- **Data Portability**: Full **Import/Export** functionality via JSON files for backups or cross-device transfer.
+- **Patient Profiling**: Maintain a local profile (Name, DOB, Gender) to personalize reports.
+
+### 📑 Clinical Readiness
+- **Professional Reports**: Clean, printable layouts designed for sharing with healthcare providers.
+- **Notes & Annotations**: Add specific context or examples to individual questions or entire sections—essential for clinical evaluations.
+- **Deep Context**: Comprehensive background information for every test (history, scoring, validity) via integrated info modals.
+
+---
+
+## 📊 Included Screening Questionnaires
+
+All questions are sourced directly from the original published research and clinical instruments.
+
+| Test | Full Name | Focus | Items |
+|------|-----------|-------|-------|
+| **ADHD-RS-IV** | ADHD Rating Scale-IV | Adult ADHD Symptoms (DSM-IV) | 18 |
+| **Wender Utah** | Wender Utah Rating Scale | Retrospective Childhood ADHD | 61 |
+| **SASI** | Women's SASI | Female ADHD Phenotype / Masking | 159 |
+| **AQ-50** | Autism Spectrum Quotient | Autistic Traits Assessment | 50 |
+| **Aspie Quiz** | Aspie Quiz v5 | Broad Neurodiverse Traits | 119 |
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Frontend**: [React 18](https://reactjs.org/) (Functional Components, Hooks)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **State Management**: React `useState` & `useMemo` with local storage synchronization.
+- **Typography**: Inter & JetBrains Mono (via Google Fonts)
+
+### Project Structure
+```text
+neuro_screening/
+├── src/
+│   ├── data/           # Screening questions and test metadata
+│   ├── App.jsx         # Main application logic and components
+│   ├── main.jsx        # Entry point
+│   └── index.css       # Tailwind directives and custom styles
+├── public/             # Static assets
+└── index.html          # HTML entry shell
+```
+
+---
+
+## 🚀 Getting Started
+
+### For Users
+1. Download the latest release or clone the repository.
+2. Open `index.html` in any modern web browser.
+3. *Note: Running via a local server (see below) ensures better stability for browser storage.*
+
+### For Developers
+Ensure you have [Node.js](https://nodejs.org/) installed.
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
+
+## ⚠️ Important Disclaimer
+
+**This is a screening tool, NOT a diagnostic instrument.**
+
+- These questionnaires help explore traits and prepare for professional evaluation.
+- High scores indicate a possible benefit from professional assessment but do not constitute a diagnosis.
+- **Always consult with a qualified healthcare professional** (Psychologist, Psychiatrist, or GP) for a formal diagnosis.
+
+---
+
+## 🤝 Collaboration
+
+Contributions are welcome! If you are interested in adding validated screening tests or improving the UI, please feel free to open a PR or Issue.
+
+---
+*Built to make neurodivergence screening accessible, manageable, and private.*
